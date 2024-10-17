@@ -1,0 +1,57 @@
+FUNCTION is_primenum(n):
+    IF n == 2 OR n == 3 THEN
+        RETURN 1  // n is prime
+    ENDIF
+    IF n <= 1 OR n MOD 2 == 0 THEN
+        RETURN 0  // n is not prime
+    ENDIF
+
+    FOR i FROM 3 TO SQUARE_ROOT(n) STEP 2 DO
+        IF n MOD i == 0 THEN
+            RETURN 0  // n is not prime
+        ENDIF
+    ENDFOR
+    RETURN 1  // n is prime
+END FUNCTION
+
+FUNCTION main:
+    DECLARE num AS unsigned long
+    DECLARE blum_needtosearch AS integer
+    DECLARE flag AS integer = 0
+
+    INPUT num
+    INPUT blum_needtosearch
+
+    DECLARE arr AS LIST OF integers
+    DECLARE blum AS LIST OF integers
+
+    FOR i FROM 0 WHILE (4 * i) + 3 < num DO
+        IF is_primenum(4 * i + 3) == 1 THEN
+            APPEND (4 * i + 3) TO arr
+        ENDIF
+    ENDFOR
+
+    FOR i FROM 0 TO LENGTH(arr) - 1 DO
+        FOR j FROM i + 1 TO LENGTH(arr) - 1 DO
+            IF (arr[i] * arr[j]) <= num THEN
+                APPEND (arr[i] * arr[j]) TO blum
+            ENDIF
+        ENDFOR
+    ENDFOR
+
+    FOR i FROM 0 TO LENGTH(blum) - 1 DO
+        PRINT blum[i] + " "
+        IF blum[i] == blum_needtosearch THEN
+            flag = 1
+        ENDIF
+    ENDFOR
+
+    IF flag == 1 THEN
+        PRINT "\nfound"
+    ELSE
+        PRINT "\nnot found"
+    ENDIF
+
+    PRINT "\nsum never found xD"
+    
+END FUNCTION

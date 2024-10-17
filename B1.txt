@@ -1,0 +1,43 @@
+FUNCTION bubbleSort(arr, n)
+    FOR i FROM 0 TO n - 2 DO
+        FOR u FROM i + 1 TO n - 1 DO
+            IF arr[i] > arr[u] THEN
+                SWAP(arr[i], arr[u])
+            ENDIF
+        ENDFOR
+    ENDFOR
+END FUNCTION
+
+FUNCTION main()
+    DECLARE n AS integer = 0
+    DECLARE index AS integer = 0
+    DECLARE mau[20] AS character array
+    DECLARE num[100] AS integer array
+
+    PRINT "nhap so doi tuong"
+    READ n
+
+    PRINT "nhap doi tuong"
+    FOR i FROM 0 TO n - 1 DO
+        READ mau
+        IF mau[0] == 'd' THEN
+            num[i] = 0
+        ELSE IF mau[0] == 't' THEN
+            num[i] = 1
+        ELSE IF mau[0] == 'x' THEN
+            num[i] = 2
+        ENDIF
+    ENDFOR
+
+    CALL bubbleSort(num, n)
+
+    FOR i FROM 0 TO n - 1 DO
+        IF num[i] == 0 THEN
+            PRINT "do"
+        ELSE IF num[i] == 1 THEN
+            PRINT "trang"
+        ELSE IF num[i] == 2 THEN
+            PRINT "xanh"
+        ENDIF
+    ENDFOR
+END FUNCTION
